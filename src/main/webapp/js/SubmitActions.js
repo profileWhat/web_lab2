@@ -8,22 +8,32 @@ function isValidData() {
     return !(isNaN(x.value) || x.value <= -5 || x.value >= 5);
 
 }
+
 function resetChanges() {
-    x.value = null;
-    r.value = null;
-    y.value = null;
+    if (x != null) x.value = null;
+    if (y != null) y.value = null;
+    if (r != null) r.value = null;
     x = null;
     y = null;
     r = null;
-    currentRadio.checked = false;
+    if (currentRadio != null) currentRadio.checked = false;
     if (previousButton != null) previousButton.style.backgroundColor = 'white';
+    $('#rValue').val("");
+    $('#r-id').val("");
     $('#submitData').prop('disabled', true);
 }
 function buttonClick(value, button) {
+    $('#messageR').text("");
     if (previousButton != null) previousButton.style.backgroundColor = 'white';
     r = value;
+    $('#rValue').val(r);
     button.style.backgroundColor = 'lightgreen';
     previousButton = button;
+    if (isValidData()) $('#submitData').prop('disabled', false);
+}
+function radioChanged(value, radio) {
+    currentRadio = radio;
+    y = value;
     if (isValidData()) $('#submitData').prop('disabled', false);
     let pointers = $("[name='pointer']");
     let initX;
@@ -48,11 +58,6 @@ function buttonClick(value, button) {
         }, {duration: 500, queue: false});
     }
 }
-function radioChanged(value, radio) {
-    currentRadio = radio;
-    y = value;
-    if (isValidData()) $('#submitData').prop('disabled', false);
-}
 
 function textChanged() {
     x = document.getElementById("xValue");
@@ -72,20 +77,26 @@ $(document).ready(function() {
     })
 });
 $(document).ready(function () {
-    $('#clearValues').on('click', function (e) {
-        e.preventDefault();
+    $('#clearValues').on('click', function () {
         console.log("reset");
         resetChanges();
         $("#r-id").val(true);
     })
 });
 
-$("#graph-svg").on("click", function (event) {
-    if (r == null) return;
-    let canvasX = (event.offsetX - 165) / 165 * r;
-    let canvasY = (165 - event.offsetY) / 165 * r;
-    $("#x-hid").val(canvasX);
-    $("#y-hid").val(canvasY);
-    $("#send").click();
-});
+function svgClick(e) {
+    let messageR = $('#messageR');
+    console.log("graph-click")
+    if (r == null) {
+        messageR.text("Заполните это поле для клика")
+        return;
+    }
+    messageR.text("");
+    x = (e.offsetX - 165) / 165 * r;
+    y = (165 - e.offsetY) / 165 * r;
+    $("#x-hid").val(x);
+    $("#y-hid").val(y);
+    $('#submitData').prop('disabled', false);
+    $("#submitData").click();
+}
 

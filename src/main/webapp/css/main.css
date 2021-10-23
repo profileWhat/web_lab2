@@ -93,3 +93,8 @@
     background-color: lightgreen;
 }
 
+.hitPoint {
+    fill: lightgreen;
+    stroke: lightgreen;
+    stroke-width: 1;
+}

@@ -62,7 +62,7 @@ public class AreaCheckServlet extends HttpServlet {
 
     private boolean checkHit(double x, double y, double r) {
         return  (x >= 0 && x <= r/2 && y <= 0 && y >= r*(-1)) ||
-                (x <= 0 && y <= 0 && (Math.sqrt(x*x + y*y)) <= Math.abs(r)) ||
-                (x <= 0 && y >= 0 && x/2 + r/2 <= y && x/2 + r/2 >= 0);
+                (x <= 0 && y <= 0 && (Math.sqrt(x*x + y*y)) <= Math.abs(r)) && x >= r/2*(-1) && y >= r/2*(-1) ||
+                (x <= 0 && y >= 0 && (x/2 + r/2) >= y && y <= r/2 && x >= r*(-1));
     }
 }

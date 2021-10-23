@@ -27,8 +27,8 @@
     </tr>
 
     <td class = table-main-section_input>
-        <svg id="graph-svg" width="360" height="360">
-            <rect width="360" height="360" stroke="indianred" stroke-width="10px" x="0" y="0" fill="deepskyblue" fill-opacity="0.2" stroke-linejoin="round"></rect>
+        <svg id="graph-svg" width="360" height="360" xmlns="http://www.w3.org/2000/svg" onclick="svgClick(event)">
+            <rect id="graph-border" width="360" height="360" stroke="indianred" stroke-width="10px" x="0" y="0" fill="deepskyblue" fill-opacity="0.2" stroke-linejoin="round"></rect>
             <line stroke="black" stroke-width="2px" x1="180" x2="180" y1="0" y2="360"></line>
             <line stroke="black" stroke-width="2px" x1="0" x2="360" y1="180" y2="180"></line>
             <rect id="section-1" x="182" y="182" width="75" height="150" fill-opacity="0.7"></rect>
@@ -67,7 +67,7 @@
                     cy="<%=180-150*result.getY()/Math.abs(result.getR())%>"
                     data-x="<%=result.getX()%>" data-y="<%=result.getY()%>" data-r="<%=result.getR()%>"
                     data-hit="<%=result.getHit()%>" r="5"
-                    name="pointer" class="pointer"></circle>
+                    name="pointer" class="hitPoint"></circle>
             <%
                 }
             %>
@@ -107,13 +107,14 @@
             <p class="invalidData_label" id="messageY"></p>
             <br>
 
-            <fieldset id = rValue>
+            <fieldset id = rValueSet>
                 <legend class = input_label>Выберите R</legend>
-                <input class="main-offer_button" type = button name="rValue" value="1" onclick="buttonClick(1, this)">
-                <input class="main-offer_button" type = button name="rValue" value="1.5" onclick="buttonClick(1.5, this)">
-                <input class="main-offer_button" type = button name="rValue" value="2" onclick="buttonClick(2, this)">
-                <input class="main-offer_button" type = button name="rValue" value="2.5" onclick="buttonClick(2.5, this)">
-                <input class="main-offer_button" type = button name="rValue" value="3" onclick="buttonClick(3,this)">
+                <input class="main-offer_button" type = button name="rValue1" value= 1 onclick="buttonClick(1, this)">
+                <input class="main-offer_button" type = button name="rValue2" value= 1.5 onclick="buttonClick(1.5, this)">
+                <input class="main-offer_button" type = button name="rValue3" value= 2 onclick="buttonClick(2, this)">
+                <input class="main-offer_button" type = button name="rValue4" value= 2.5 onclick="buttonClick(2.5, this)">
+                <input class="main-offer_button" type = button name="rValue5" value= 3 onclick="buttonClick(3,this)">
+                <input type="hidden" value="" name="rValue" id="rValue">
             </fieldset>
             <br>
             <p class="invalidData_label" id="messageR"></p>
